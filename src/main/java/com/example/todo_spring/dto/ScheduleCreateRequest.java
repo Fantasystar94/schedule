@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetScheduleResponse {
-    private Long id;
+public class ScheduleCreateRequest {
     private String title;
     private String content;
     private String name;
-    private String createdAt;
+    private String password;
+
 }

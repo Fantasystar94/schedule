@@ -9,7 +9,7 @@ import lombok.*;
 @Table(name = "schedule")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Schedule {
+public class Schedule extends BaseEntity {
     //속
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,6 @@ public class Schedule {
     String name;
     @Column(length = 20, nullable = false)
     String password;
-    @Column(nullable = false)
-    String createdAt;
-    @Column(nullable = false)
-    String modifiedAt;
     //생
     public Schedule(String title, String content, String name, String password) {
         this.title = title;
