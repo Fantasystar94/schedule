@@ -41,4 +41,10 @@ public class ScheduleController {
         SchedulePutResponse result = scheduleService.putDetail(id, req);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @DeleteMapping("/schedules/{id}")
+    public ResponseEntity<String> deleteApi(@PathVariable Long id, @RequestBody ScheduleDelRequest req) {
+        scheduleService.deleteDetail(id, req);
+        return ResponseEntity.status(HttpStatus.OK).body("삭제완료");
+    }
 }

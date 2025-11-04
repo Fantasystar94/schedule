@@ -99,11 +99,6 @@ public class ScheduleService {
     public SchedulePutResponse putDetail(Long id, SchedulePutRequest req) {
         SchedulePutResponse schedulePutResponse;
 
-//        private final Long id;
-//        private final String title;
-//        private final String content;
-//        private final String password;
-//        private final String modifiedAt;
         Schedule schedule = scheduleRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("없는 아이디"));
         if(schedule.getPassword().equals(req.getPassword())) {
@@ -119,4 +114,15 @@ public class ScheduleService {
         }
     }
 
+    @Transactional
+    public void deleteDetail(Long id, ScheduleDelRequest req) {
+
+        Schedule schedule = scheduleRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("없는 아이디"));
+        if(schedule.getPassword().equals(req.getPassword())) {
+            scheduleRepo.delete(schedule);
+        } else {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+    }
 }
