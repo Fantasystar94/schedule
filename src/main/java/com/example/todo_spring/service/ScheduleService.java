@@ -1,9 +1,6 @@
 package com.example.todo_spring.service;
 
-import com.example.todo_spring.dto.ScheduleGetDetailResponse;
-import com.example.todo_spring.dto.ScheduleGetResponse;
-import com.example.todo_spring.dto.ScheduleCreateRequest;
-import com.example.todo_spring.dto.ScheduleCreateResponse;
+import com.example.todo_spring.dto.*;
 import com.example.todo_spring.entity.Schedule;
 import com.example.todo_spring.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -97,4 +94,29 @@ public class ScheduleService {
                 schedule.getCreatedAt()
         );
     }
+
+    @Transactional
+    public SchedulePutResponse putDetail(Long id, SchedulePutRequest req) {
+        SchedulePutResponse schedulePutResponse;
+
+//        private final Long id;
+//        private final String title;
+//        private final String content;
+//        private final String password;
+//        private final String modifiedAt;
+        Schedule schedule = scheduleRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("없는 아이디"));
+        if(schedule.getPassword().equals(req.getPassword())) {
+            return new SchedulePutResponse(
+                    schedule.getId(),
+                    req.getTitle(),
+                    req.getContent(),
+                    req.getPassword(),
+                    schedule.getModifiedAt()
+            );
+        } else {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+    }
+
 }

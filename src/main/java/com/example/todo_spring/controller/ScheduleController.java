@@ -1,9 +1,6 @@
 package com.example.todo_spring.controller;
 
-import com.example.todo_spring.dto.ScheduleGetDetailResponse;
-import com.example.todo_spring.dto.ScheduleGetResponse;
-import com.example.todo_spring.dto.ScheduleCreateRequest;
-import com.example.todo_spring.dto.ScheduleCreateResponse;
+import com.example.todo_spring.dto.*;
 import com.example.todo_spring.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,6 +33,12 @@ public class ScheduleController {
     @GetMapping("/schedules/{id}")
     public ResponseEntity<ScheduleGetDetailResponse> getDetailApi(@PathVariable Long id) {
         ScheduleGetDetailResponse result = scheduleService.getDetail(id);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @PutMapping("/schedules/{id}")
+    public ResponseEntity<SchedulePutResponse> putDetailApi(@PathVariable Long id, @RequestBody SchedulePutRequest req) {
+        SchedulePutResponse result = scheduleService.putDetail(id, req);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }
