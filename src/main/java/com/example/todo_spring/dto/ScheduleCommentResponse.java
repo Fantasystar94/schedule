@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ScheduleCreateResponse<T> {
+public class ScheduleCommentResponse {
     private final int status;
     private final String message;
-    private final T data;
+    private final ScheduleCreateCommentResponseData data;
 }

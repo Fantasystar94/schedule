@@ -47,4 +47,11 @@ public class ScheduleController {
         ScheduleDelResponse result = scheduleService.deleteDetail(HttpStatus.OK.value(), id, req);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @PostMapping("/schedules/comment/{id}")
+    public ResponseEntity<ScheduleCommentResponse> commentPostApi(@PathVariable Long id, @RequestBody ScheduleCommentRequest req){
+        ScheduleCommentResponse result = scheduleService.commentSave(HttpStatus.CREATED.value(), id, req);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
 }

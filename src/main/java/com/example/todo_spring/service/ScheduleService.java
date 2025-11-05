@@ -1,7 +1,9 @@
 package com.example.todo_spring.service;
 
 import com.example.todo_spring.dto.*;
+import com.example.todo_spring.entity.Comment;
 import com.example.todo_spring.entity.Schedule;
+import com.example.todo_spring.repository.CommentRepository;
 import com.example.todo_spring.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class ScheduleService {
     //속
     private final ScheduleRepository scheduleRepo;
+    private final CommentRepository commentRepo;
     //생
 
     //기
@@ -141,5 +144,35 @@ public class ScheduleService {
         } else {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
+    }
+
+    @Transactional
+    public ScheduleCommentResponse commentSave(int status, Long id, ScheduleCommentRequest req) {
+
+        //코멘트 저장
+        Comment comment = new Comment(
+                req.getContent(),
+                req.getName(),
+                req.getPassword(),
+                id
+        );
+        //한 일정 당 10개의 댓글만 가능.
+        //comment의 아이디를 찾아서 몇개인지확인
+        //findAll().stream().~~ id 와 schid 를 비교. 이후 ++.
+        ScheduleCommentResponse scheduleCommentResponse;
+        long count = commentRepo.findAll()
+                .stream()
+                .filter( c -> c.getScheduleId().equals(id))
+                .count();
+        if (count < 10) {
+            Comment saved = commentRepo.save(comment);
+            ScheduleCreateCommentResponseData  scheduleCreateCommentResponseData = new ScheduleCreateCommentResponseData(comment);
+            scheduleCommentResponse = new ScheduleCommentResponse(status,"postMessage", scheduleCreateCommentResponseData);
+            //비밀번호 제외하고 리턴해주기
+        } else {
+            throw new IllegalArgumentException("댓글은 한 게시글에 10개씩만 게시 가능합니다.");
+        }
+
+        return scheduleCommentResponse;
     }
 }

@@ -20,7 +20,7 @@ public class Schedule extends BaseEntity {
     private String content;
     @Column(length = 20, nullable = false)
     private String name;
-    @Column(length = 20, nullable = false)
+    @Column(length = 50, nullable = false)
     private String password;
     //생
     public Schedule(String title, String content, String name, String password) {
