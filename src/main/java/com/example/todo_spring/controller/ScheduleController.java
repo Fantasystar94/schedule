@@ -49,8 +49,8 @@ public class ScheduleController {
     }
 
     @PostMapping("/schedules/comment/{id}")
-    public ResponseEntity<ScheduleCommentResponse> commentPostApi(@PathVariable Long id, @RequestBody ScheduleCommentRequest req){
-        ScheduleCommentResponse result = scheduleService.commentSave(HttpStatus.CREATED.value(), id, req);
+    public ResponseEntity<CommentResponse> commentPostApi(@PathVariable Long id, @RequestBody CommentRequest req){
+        CommentResponse result = scheduleService.commentSave(HttpStatus.CREATED.value(), id, req);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 

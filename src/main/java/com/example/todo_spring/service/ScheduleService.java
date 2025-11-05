@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,7 +50,11 @@ public class ScheduleService {
     @Transactional(readOnly = true)
     public List<ScheduleGetResponse> getAll(int status, String name) {
         // DB에서 모든 데이터 조회
-        List<Schedule> schedules = scheduleRepo.findAll().stream().sorted((s1, s2) -> s2.getModifiedAt().compareTo(s1.getModifiedAt())).collect(Collectors.toList());
+        List<Schedule> schedules = scheduleRepo
+                .findAll()
+                .stream()
+                .sorted((s1, s2) -> s2.getModifiedAt().compareTo(s1.getModifiedAt()))
+                .collect(Collectors.toList());
         List<ScheduleGetResponse> scheduleGetResponses = new ArrayList<>();
         List<ScheduleGetReponseData> scheduleGetReponsesData = new ArrayList<>();
         System.out.println(name);
@@ -93,7 +95,19 @@ public class ScheduleService {
     public ScheduleGetDetailResponse getDetail(int status, Long id) {
         Schedule schedule = scheduleRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("없는 값."));
-
+        List<CommentDetailResponseData> commentRes = commentRepo
+                .findAll()
+                .stream()
+                .filter( c -> c.getScheduleId().equals(id))
+                .map( c ->
+                new CommentDetailResponseData(
+                    c.getContent(),
+                    c.getName(),
+                    c.getScheduleId(),
+                    c.getCreatedAt(),
+                    c.getModifiedAt()
+                )).collect(Collectors.toList());
+        System.out.println(commentRes);
         return new ScheduleGetDetailResponse(
                 status,
                 "getDetailResponse",
@@ -104,7 +118,8 @@ public class ScheduleService {
                         schedule.getName(),
                         schedule.getCreatedAt(),
                         schedule.getModifiedAt()
-                )
+                ),
+                commentRes
         );
     }
 
@@ -147,7 +162,7 @@ public class ScheduleService {
     }
 
     @Transactional
-    public ScheduleCommentResponse commentSave(int status, Long id, ScheduleCommentRequest req) {
+    public CommentResponse commentSave(int status, Long id, CommentRequest req) {
 
         //코멘트 저장
         Comment comment = new Comment(
@@ -159,15 +174,15 @@ public class ScheduleService {
         //한 일정 당 10개의 댓글만 가능.
         //comment의 아이디를 찾아서 몇개인지확인
         //findAll().stream().~~ id 와 schid 를 비교. 이후 ++.
-        ScheduleCommentResponse scheduleCommentResponse;
+        CommentResponse scheduleCommentResponse;
         long count = commentRepo.findAll()
                 .stream()
                 .filter( c -> c.getScheduleId().equals(id))
                 .count();
         if (count < 10) {
             Comment saved = commentRepo.save(comment);
-            ScheduleCreateCommentResponseData  scheduleCreateCommentResponseData = new ScheduleCreateCommentResponseData(comment);
-            scheduleCommentResponse = new ScheduleCommentResponse(status,"postMessage", scheduleCreateCommentResponseData);
+            CommentCreateResponseData scheduleCreateCommentResponseData = new CommentCreateResponseData(comment);
+            scheduleCommentResponse = new CommentResponse(status,"postMessage", scheduleCreateCommentResponseData);
             //비밀번호 제외하고 리턴해주기
         } else {
             throw new IllegalArgumentException("댓글은 한 게시글에 10개씩만 게시 가능합니다.");
