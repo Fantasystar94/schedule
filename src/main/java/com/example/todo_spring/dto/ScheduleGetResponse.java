@@ -5,16 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class ScheduleGetResponse {
-    private Long id;
-    private String title;
-    private String content;
-    private String name;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
-
+public class ScheduleGetResponse{
+    private final int status;
+    private final String message;
+    private final List<ScheduleGetReponseData> data;
 }

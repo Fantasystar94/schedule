@@ -6,9 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ScheduleCreateResponse {
-    private final Long id;
-    private final String title;
-    private final String content;
-    private final String name;
-    private final String createdAt;
+    private final int status;
+    private final String message;
+    private final ScheduleCreateResponseData data;
 }

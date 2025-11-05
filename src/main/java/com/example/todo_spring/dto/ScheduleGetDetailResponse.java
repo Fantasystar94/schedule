@@ -8,9 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class ScheduleGetDetailResponse {
-    private final Long id;
-    private final String title;
-    private final String content;
-    private final String name;
-    private final LocalDateTime createdAt;
+    private final int status;
+    private final String message;
+    private final ScheduleGetReponseData data;
 }

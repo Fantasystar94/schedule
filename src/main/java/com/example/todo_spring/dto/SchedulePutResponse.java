@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class SchedulePutResponse {
-    private final Long id;
-    private final String title;
-    private final String content;
-    private final String password;
-    private final LocalDateTime modifiedAt;
+    private final int status;
+    private final String messgae;
+    private final SchedulePutReponseData data;
 }

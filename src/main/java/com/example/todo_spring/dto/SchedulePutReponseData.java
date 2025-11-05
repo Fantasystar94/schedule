@@ -1,0 +1,16 @@
+package com.example.todo_spring.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.time.LocalDateTime;
+
+@Getter
+@AllArgsConstructor
+public class SchedulePutReponseData {
+    private final Long id;
+    private final String title;
+    private final String content;
+    private final String password;
+    private final LocalDateTime modifiedAt;
+}

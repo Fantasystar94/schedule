@@ -7,5 +7,6 @@ import java.time.LocalTime;
 @Getter
 @AllArgsConstructor
 public class ScheduleDelResponse {
-    private String message = "삭제되었습니다.";
+    private final int status;
+    private final String messgae;
 }
