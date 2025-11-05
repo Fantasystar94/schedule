@@ -57,7 +57,6 @@ public class ScheduleService {
                 .collect(Collectors.toList());
         List<ScheduleGetResponse> scheduleGetResponses = new ArrayList<>();
         List<ScheduleGetReponseData> scheduleGetReponsesData = new ArrayList<>();
-        System.out.println(name);
         if (name == null) {
             schedules.forEach(s -> {
                 scheduleGetReponsesData.add(new ScheduleGetReponseData(
@@ -107,7 +106,6 @@ public class ScheduleService {
                     c.getCreatedAt(),
                     c.getModifiedAt()
                 )).collect(Collectors.toList());
-        System.out.println(commentRes);
         return new ScheduleGetDetailResponse(
                 status,
                 "getDetailResponse",
