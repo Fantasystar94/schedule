@@ -4,6 +4,8 @@ package com.example.todo_spring.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Table(name = "schedule")
@@ -31,10 +33,9 @@ public class Schedule extends BaseEntity {
     }
 
     //기
-    public void update(String title, String content, String name, String password) {
+    public void update(String title, String name, LocalDateTime modifiedAt) {
         this.title = title;
-        this.content = content;
         this.name = name;
-        this.password = password;
+        setModifiedAt(modifiedAt);
     }
 }

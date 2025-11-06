@@ -46,6 +46,8 @@ public class ScheduleService {
                         schedule.getTitle(),
                         schedule.getContent(),
                         schedule.getName(),
+                        schedule.getCreatedAt(),
+                        schedule.getModifiedAt()
                 )
         );
     }
@@ -128,7 +130,9 @@ public class ScheduleService {
     public SchedulePutResponse putDetail(Long id,int status ,SchedulePutRequest req) {
         Schedule schedule = scheduleRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("없는 아이디"));
+        schedule.update(req.getTitle(),req.getName(),schedule.getModifiedAt());
         if(schedule.getPassword().equals(req.getPassword())) {
+
 
             return new SchedulePutResponse(
                     status,
@@ -136,7 +140,7 @@ public class ScheduleService {
                     new SchedulePutReponseData(
                             schedule.getId(),
                             req.getTitle(),
-                            req.getContent(),
+                            req.getName(),
                             req.getPassword(),
                             schedule.getModifiedAt()
                     )

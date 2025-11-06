@@ -3,6 +3,8 @@ package com.example.todo_spring.dto.schedule;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @AllArgsConstructor
 public class ScheduleCreateResponseData {
@@ -10,4 +12,6 @@ public class ScheduleCreateResponseData {
     private final String title;
     private final String content;
     private final String Name;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime modifiedAt;
 }
