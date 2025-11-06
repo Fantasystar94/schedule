@@ -1,5 +1,6 @@
-package com.example.todo_spring.dto;
+package com.example.todo_spring.dto.schedule;
 
+import com.example.todo_spring.dto.comment.CommentDetailResponseData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import java.util.List;

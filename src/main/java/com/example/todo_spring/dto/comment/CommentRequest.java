@@ -1,14 +1,11 @@
-package com.example.todo_spring.dto;
+package com.example.todo_spring.dto.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class ScheduleCreateRequest {
-    private String title;
+public class CommentRequest {
     private String content;
     private String name;
     private String password;

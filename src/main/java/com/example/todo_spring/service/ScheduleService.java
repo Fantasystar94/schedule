@@ -1,6 +1,10 @@
 package com.example.todo_spring.service;
 
-import com.example.todo_spring.dto.*;
+import com.example.todo_spring.dto.comment.CommentCreateResponseData;
+import com.example.todo_spring.dto.comment.CommentDetailResponseData;
+import com.example.todo_spring.dto.comment.CommentRequest;
+import com.example.todo_spring.dto.comment.CommentResponse;
+import com.example.todo_spring.dto.schedule.*;
 import com.example.todo_spring.entity.Comment;
 import com.example.todo_spring.entity.Schedule;
 import com.example.todo_spring.repository.CommentRepository;
@@ -42,7 +46,6 @@ public class ScheduleService {
                         schedule.getTitle(),
                         schedule.getContent(),
                         schedule.getName(),
-                        schedule.getPassword()
                 )
         );
     }

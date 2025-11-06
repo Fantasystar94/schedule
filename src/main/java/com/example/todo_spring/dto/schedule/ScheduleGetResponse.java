@@ -1,10 +1,8 @@
-package com.example.todo_spring.dto;
+package com.example.todo_spring.dto.schedule;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter

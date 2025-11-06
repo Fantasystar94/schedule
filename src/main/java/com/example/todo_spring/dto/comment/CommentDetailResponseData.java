@@ -1,4 +1,4 @@
-package com.example.todo_spring.dto;
+package com.example.todo_spring.dto.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

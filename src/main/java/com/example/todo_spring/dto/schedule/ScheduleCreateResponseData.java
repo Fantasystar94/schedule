@@ -1,4 +1,4 @@
-package com.example.todo_spring.dto;
+package com.example.todo_spring.dto.schedule;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,5 +10,4 @@ public class ScheduleCreateResponseData {
     private final String title;
     private final String content;
     private final String Name;
-    private final String password;
 }

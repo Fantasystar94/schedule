@@ -1,6 +1,8 @@
 package com.example.todo_spring.controller;
 
-import com.example.todo_spring.dto.*;
+import com.example.todo_spring.dto.comment.CommentRequest;
+import com.example.todo_spring.dto.comment.CommentResponse;
+import com.example.todo_spring.dto.schedule.*;
 import com.example.todo_spring.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
